@@ -14,7 +14,7 @@ mongoose.connect(db, {}).then(()=> console.log("Db Connect")).catch(err => conso
 const userRoutes = require('./routes/User')
 app.use('/users', userRoutes);
 
-const postsRoutes = require('./routes/User')
+const postsRoutes = require('./routes/Post')
 app.use('/posts', postsRoutes);
 
 app.get('/', (req, res) => res.json({
