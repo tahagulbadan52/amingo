@@ -28,3 +28,5 @@ router.post('/', (req, res) => {
         .then(post => res.json(post))
         .catch(err => console.log(err))
 });
+
+module.exports = router;
