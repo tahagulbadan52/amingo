@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     message: {
         type: String,
-        require: true
+        required: true
     },
     user: {
         type: Schema.ObjectId, ref: 'user'
