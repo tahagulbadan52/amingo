@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const User = require('./models/User');
 const Post = require('./models/Post');
+const keys = require('./config/keys');
 
-const db = "mongodb+srv://astrolabs:makeithappen@cluster0-svfks.mongodb.net/test?retryWrites=true&w=majority";
+const db = keys.mongoURL;
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
