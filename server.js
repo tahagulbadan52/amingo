@@ -6,7 +6,7 @@ const User = require('./models/User');
 const Post = require('./models/Post');
 const keys = require('./config/keys');
 
-const db = keys.mongoURL;
+const db = keys.mongoURI;
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
