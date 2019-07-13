@@ -5,6 +5,7 @@ const app = express();
 const User = require('./models/User');
 const Post = require('./models/Post');
 const keys = require('./config/keys');
+const passport = require('passport');
 
 const db = keys.mongoURI;
 
@@ -12,11 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 mongoose.connect(db, {}).then(()=> console.log("Db Connect")).catch(err => console.log(err));
 
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
+
 const userRoutes = require('./routes/User')
 app.use('/users', userRoutes);
 
 const postsRoutes = require('./routes/Posts')
 app.use('/posts', postsRoutes);
+
+const authRoutes = require('./routes/Auth');
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => res.json({
     msg: "Hello Amigo!! taha"
