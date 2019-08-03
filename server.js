@@ -6,22 +6,26 @@ const User = require('./models/User');
 const Post = require('./models/Post');
 const keys = require('./config/keys');
 const passport = require('passport');
+const cors = require('cors');
 
 const db = keys.mongoURI;
 
+app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 mongoose.connect(db, {}).then(()=> console.log("Db Connect")).catch(err => console.log(err));
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
-
+ 
 
 const userRoutes = require('./routes/User')
-app.use('/users', userRoutes);
+app.use('/users', passport.authenticate('jwt', {session: false }), userRoutes);
 
 const postsRoutes = require('./routes/Posts')
-app.use('/posts', postsRoutes);
+app.use('/posts', passport.authenticate('jwt', {session: false }), postsRoutes);
 
 const authRoutes = require('./routes/Auth');
 app.use('/auth', authRoutes);

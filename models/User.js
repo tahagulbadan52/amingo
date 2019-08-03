@@ -14,6 +14,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    gender: {
+        type: String,
+        required: false
+    },
+    followers: [{
+        type: Schema.ObjectId,
+        ref: 'user'
+    }],
     date: {
         type: Date,
         default: Date.now
